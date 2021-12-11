@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SHELLCOLORD_FIFOS_DIR=${SHELLCOLORD_FIFOS_DIR:-${XDG_RUNTIME:-/run/user/$(id -u $USER)}/shellcolord}
+
+if [ -n "$2" ]; then
+    FIFO_PATH="${SHELLCOLORD_FIFOS_DIR}/$2"
+else
+    FIFO_PATH="${SHELLCOLORD_FIFOS_DIR}/*"
+fi
+
+echo "$1" | tee $FIFO_PATH >/dev/null
