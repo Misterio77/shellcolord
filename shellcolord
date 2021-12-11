@@ -53,7 +53,7 @@ apply_colors() {
     apply_color "11;#$base00" # base00
 
     # cursor
-    apply_color "12;7" # base00
+    apply_color "12;#$base05" # base00
 }
 
 shellcolord() {
