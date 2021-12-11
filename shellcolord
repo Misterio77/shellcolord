@@ -84,4 +84,5 @@ create_fifo
 trap remove_fifo EXIT
 
 disabled=false
+apply_colors
 shellcolord
