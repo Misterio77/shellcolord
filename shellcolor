@@ -8,4 +8,8 @@ else
     FIFO_PATH="${SHELLCOLORD_FIFOS_DIR}/*"
 fi
 
-echo "$1" | tee $FIFO_PATH >/dev/null
+for fifo in $FIFO_PATH; do
+    kill -0 $(basename "$fifo") &>/dev/null \
+        && echo "$1" > $fifo \
+        || rm "$fifo"
+done
