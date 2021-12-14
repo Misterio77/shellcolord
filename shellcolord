@@ -10,14 +10,14 @@ FIFO_PATH="${SHELLCOLORD_FIFOS_DIR:-${XDG_RUNTIME:-/run/user/$(id -u $USER)}/she
 # Config file path
 CONFIG_FILE="${SHELLCOLORD_CONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/shellcolor.conf}"
 
-create_fifo() {
+remove_fifo() {
     rm "$FIFO_PATH" 2>/dev/null
-    mkdir -p "$(dirname "$FIFO_PATH")" || exit 2
-    mkfifo "$FIFO_PATH" || exit 3
 }
 
-remove_fifo() {
-    rm "$FIFO_PATH"
+create_fifo() {
+    remove_fifo
+    mkdir -p "$(dirname "$FIFO_PATH")" || exit 2
+    mkfifo "$FIFO_PATH" || exit 3
 }
 
 apply_color() { echo -ne "\033]$@\033\\"; }
