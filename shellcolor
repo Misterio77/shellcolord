@@ -9,7 +9,14 @@ else
 fi
 
 for fifo in $FIFO_PATH; do
-    kill -0 $(basename "$fifo") &>/dev/null \
-        && echo "$1" > $fifo \
-        || rm "$fifo"
+    # Check that fifo exists
+    if [ -f "$fifo"]; then
+        # Check that it has a corresponding process
+        if kill -0 $(basename "$fifo") &>/dev/null; then
+            echo "$1" > $fifo
+        # Remove it, as its controller is dead
+        else
+            rm "$fifo"
+        fi
+    fi
 done
