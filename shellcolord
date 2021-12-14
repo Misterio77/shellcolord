@@ -62,7 +62,7 @@ shellcolord() {
         case "$command" in
             "apply")
                 if [ "$disabled" != true ]; then
-                    apply_colors
+                    apply_colors 1>&2
                 fi
             ;;
 
